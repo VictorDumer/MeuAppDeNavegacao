@@ -9,6 +9,7 @@ export default function LoginScreen({ navigation }) {
     const verificacao = ()=> {
         if(email =='VictorDumer' && senha == 'Admin123'){
             navigation.navigate('Home')
+            
         }else{
             alert('Senha incorreta')
         }

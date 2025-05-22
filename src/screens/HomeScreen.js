@@ -10,7 +10,7 @@ export default function HomeScreen({ navigation }) {
       <View style={styles.buttonContainer}>
         <Button 
           title="Go to Details" 
-          onPress={() => navigation.navigate('Details')} 
+          onPress={() => navigation.navigate('Login')} 
         />
       </View>
       <View style={styles.buttonContainer}>
