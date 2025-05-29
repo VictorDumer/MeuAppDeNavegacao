@@ -1,15 +1,17 @@
 import React, { useState } from "react";
 import { View, Text, StyleSheet, Dimensions,TextInput, TouchableOpacity} from 'react-native';
 const windowWidth = Dimensions.get('window').width;
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export default function LoginScreen({ navigation }) {
     const [email,setEmail] = useState('');
     const [senha,setSenha] = useState('');
+    const [verify, setVerify] = useState(false);
 
     const verificacao = ()=> {
-        if(email =='VictorDumer' && senha == 'Admin123'){
+        if(email =='VictorDumer' && senha == 'Admin123' || verify==true){
             navigation.navigate('Home')
-            
+            setVerify== true;
         }else{
             alert('Senha incorreta')
         }
@@ -23,7 +25,6 @@ export default function LoginScreen({ navigation }) {
                 value={email}
                 onChangeText={setEmail}
                 keyboardType='email-address'
-
                 />
                 <TextInput
                 style={styles.input}
@@ -35,6 +36,7 @@ export default function LoginScreen({ navigation }) {
                 />
                 <TouchableOpacity style={styles.botao} onPress={verificacao}>
                     <Text style={styles.botaoTexto}>Fazer login</Text>
+                    
                 </TouchableOpacity>
             </View>
 
