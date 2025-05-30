@@ -2,16 +2,18 @@ import React, { useState } from "react";
 import { View, Text, StyleSheet, Dimensions,TextInput, TouchableOpacity} from 'react-native';
 const windowWidth = Dimensions.get('window').width;
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import Verify from './Verify.js'
 
 export default function LoginScreen({ navigation }) {
     const [email,setEmail] = useState('');
     const [senha,setSenha] = useState('');
     const [verify, setVerify] = useState(false);
-
+    Verify();
+    
     const verificacao = ()=> {
         if(email =='VictorDumer' && senha == 'Admin123' || verify==true){
             navigation.navigate('Home')
-            setVerify== true;
+            setVerify(true);
         }else{
             alert('Senha incorreta')
         }
@@ -80,8 +82,8 @@ const styles = StyleSheet.create({
         elevation: 5,
     },
     botaoTexto:{
-        fontSize:20, // Reduzi um pouco o tamanho da fonte
+        fontSize:20, // Reduzi um pouco o tamanho da fonte, cara realmente quis mostrar que mudou o tamanho da fonte comparada com a do professor kkkkkk 💀
         color:'#fafafa',
-        fontWeight: 'bold' // Deixei o texto em negrito
+        fontWeight: 'bold' // Deixei o texto em negrito, top #10 comentários
     }
 })
