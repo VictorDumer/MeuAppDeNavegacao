@@ -2,25 +2,31 @@ import React, { useState } from "react";
 import { View, Text, StyleSheet, Dimensions,TextInput, TouchableOpacity} from 'react-native';
 const windowWidth = Dimensions.get('window').width;
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import Verify from './Verify.js'
 
 export default function LoginScreen({ navigation }) {
     const [email,setEmail] = useState('');
     const [senha,setSenha] = useState('');
-    const [verify, setVerify] = useState(false);
-    Verify();
     
     const verificacao = ()=> {
-        if(email =='VictorDumer' && senha == 'Admin123' || verify==true){
-            navigation.navigate('Home')
-            setVerify(true);
+        
+        if(email =='VictorDumer' && senha == 'Admin123'){
+            navigation.navigate('Home');
+            
+            const saveVerify = async (setVerify) => {
+                try{
+                    await AsyncStorage.setItem('login','logado');
+                }catch(err){
+                    console.log('Ocorreu um erro :', err);
+                }   
+            }
         }else{
             alert('Senha incorreta')
         }
     }
     return (
         <View style={styles.container}>
-            <Text style={styles.title}>Login</Text>
+            
+            <Text style={styles.title} >Login</Text>
             <View>
                 <TextInput
                 style={styles.input} placeholder='Enter with your username'
@@ -36,7 +42,7 @@ export default function LoginScreen({ navigation }) {
                 onChangeText={setSenha}
 
                 />
-                <TouchableOpacity style={styles.botao} onPress={verificacao}>
+                <TouchableOpacity style={styles.botao} onPress={verificacao} >
                     <Text style={styles.botaoTexto}>Fazer login</Text>
                     
                 </TouchableOpacity>
