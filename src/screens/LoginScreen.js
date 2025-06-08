@@ -7,21 +7,16 @@ export default function LoginScreen({ navigation }) {
     const [email,setEmail] = useState('');
     const [senha,setSenha] = useState('');
     
-    const verificacao = ()=> {
+    const verificacao = async ()=> {
         
         if(email =='VictorDumer' && senha == 'Admin123'){
+            await AsyncStorage.setItem('login', 'logado');
+            console.log('Verificação foi um sucesso')
             navigation.navigate('Home');
-            
-            const saveVerify = async (setVerify) => {
-                try{
-                    await AsyncStorage.setItem('login','logado');
-                }catch(err){
-                    console.log('Ocorreu um erro :', err);
-                }   
-            }
         }else{
             alert('Senha incorreta')
-        }
+            console.log('\n Try: Username = VictorDumer & Password = Admin123')
+                }
     }
     return (
         <View style={styles.container}>
@@ -44,7 +39,6 @@ export default function LoginScreen({ navigation }) {
                 />
                 <TouchableOpacity style={styles.botao} onPress={verificacao} >
                     <Text style={styles.botaoTexto}>Fazer login</Text>
-                    
                 </TouchableOpacity>
             </View>
 
@@ -56,31 +50,33 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: '#e0eefa',
+        backgroundColor: '#dce2e5',
     },
     title:{
+        color: '#063970',
         fontSize: 24,
-        marginBottom: 20,
+        marginBottom: 50,
     },
     input:{
         height: windowWidth * 0.2,
         width: windowWidth * 0.8,
-        color:'#333',
+        color:'#154c79',
         borderColor: 'gray',
-        borderWidth: 1,
+        borderWidth: 2,
         marginBottom: '5%',
         marginTop:10,
-        paddingHorizontal: 8,
-        borderRadius: 5,
+        paddingHorizontal: '7%',
+        borderRadius: 60,
     },
     botao:{
         alignItems:'center',
         justifyContent:'center',
         height: windowWidth*0.3, 
-        width:windowWidth*0.8, 
-        backgroundColor:'#8e48cf',
-        borderRadius:15,
-        marginTop: 20, 
+        width:windowWidth*0.7, 
+        backgroundColor:'#063970',
+        borderRadius:70,
+        marginTop: windowWidth *0.1,
+        marginLeft: windowWidth * 0.05,
         shadowColor: '#000', 
         shadowOffset: { width: 0, height: 2 },
         shadowOpacity: 0.25,
@@ -88,8 +84,8 @@ const styles = StyleSheet.create({
         elevation: 5,
     },
     botaoTexto:{
-        fontSize:20, // Reduzi um pouco o tamanho da fonte, cara realmente quis mostrar que mudou o tamanho da fonte comparada com a do professor kkkkkk 💀
+        fontSize:20, 
         color:'#fafafa',
-        fontWeight: 'bold' // Deixei o texto em negrito, top #10 comentários
+        fontWeight: 'bold'
     }
 })
